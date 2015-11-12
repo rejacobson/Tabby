@@ -95,28 +95,11 @@
 		var es = o.selectionEnd;
 
 		// when there's no selection and we're just working with the caret, we'll add/remove the tabs at the caret, providing more control
-		if(ss === es) {
-			// SHIFT+TAB
-			if (shft) {
-				// check to the left of the caret first
-				if (ss-options.tabString === o.value.substring(ss-options.tabString.length, ss)) {
-					o.value = o.value.substring(0, ss-options.tabString.length) + o.value.substring(ss); // put it back together omitting one character to the left
-					o.focus();
-					o.setSelectionRange(ss - options.tabString.length, ss - options.tabString.length);
-				}
-				// then check to the right of the caret
-				else if (ss-options.tabString === o.value.substring(ss, ss + options.tabString.length)) {
-					o.value = o.value.substring(0, ss) + o.value.substring(ss + options.tabString.length); // put it back together omitting one character to the right
-					o.focus();
-					o.setSelectionRange(ss,ss);
-				}
-			}
+		if((ss === es) && !shft) {
 			// TAB
-			else {
-				o.value = o.value.substring(0, ss) + options.tabString + o.value.substring(ss);
-				o.focus();
-				o.setSelectionRange(ss + options.tabString.length, ss + options.tabString.length);
-			}
+      o.value = o.value.substring(0, ss) + options.tabString + o.value.substring(ss);
+      o.focus();
+      o.setSelectionRange(ss + options.tabString.length, ss + options.tabString.length);
 		}
 		// selections will always add/remove tabs from the start of the line
 		else {
