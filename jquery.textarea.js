@@ -84,6 +84,8 @@
 		// ie; document.selection is always available
 		else if (document.selection) ie_tab (o, shft, options);
 
+    $(o).trigger('tab', shft);
+
 		o.scrollTop = scrollTo;
 	}
 
